@@ -12,14 +12,16 @@ class gausspk{
     double4 L;
     gsl_spline *Pk;
     gsl_interp_accel *acc;
-    std::vector<double2> dk;
     std::mt19937_64 gen;
     std::normal_distribution<double> dist;
-    std::vector<double> kx, ky, kz;
     
     std::vector<double> fftFrequencies(int n, double l);
     
     public:
+        // Some public data members for ease of use
+        std::vector<double2> dk;
+        std::vector<double> kx, ky, kz;
+        
         gausspk();
         
         gausspk(int N, double L);

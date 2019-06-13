@@ -28,8 +28,10 @@ int main(int argc, char *argv[]) {
     for (int real = p.geti("startNum"); real < p.geti("startNum") + p.geti("numReals"); ++real) {
         std::cout << "Realization #" << real << std::endl;
         std::string outFile = filename(p.gets("outbase"), p.geti("digits"), real, p.gets("outext"));
+        std::string realFile = filename(p.gets("realbase"), p.geti("digits"), real, p.gets("realext"));
         
         delta.sample();
+        delta.writeBIN(realFile);
         Pk.calculate(delta.dk, delta.kx, delta.ky, delta.kz);
         Pk.write(outFile);
     }

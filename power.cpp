@@ -26,7 +26,7 @@ void power::init(int N_bins, double k_min, double k_max, double Delta_k) {
     this->N_k.resize(N_bins);
     
     for (int i = 0; i < N_bins; ++i) {
-        this->k[i] = (i + 0.5)*Delta_k;
+        this->k[i] = (i + 0.5)*Delta_k + k_min;
     }
     this->first = true;
 }

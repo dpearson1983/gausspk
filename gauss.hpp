@@ -24,6 +24,8 @@ class gausspk{
         
         gausspk();
         
+        ~gausspk();
+        
         gausspk(int N, double L);
         
         gausspk(int3 N, double3 L);

@@ -9,8 +9,23 @@
 #include "pods.hpp"
 #include "gauss.hpp"
 
+std::vector<double> gausspk::fftFrequencies(int n, double l) {
+    std::vector<double> k(n);
+    double deltak = 2.0*M_PI/l;
+    for (int i = 0; i <= n/2; ++i)
+        k[i] = i*deltak;
+    for (int i = n/2 + 1; i < n; ++i)
+        k[i] = (i - n)*deltak;
+    return k;
+}
+
 gausspk::gausspk() : gen((std::random_device())()), dist(0.0, 1.0) {
     this->N = {0, 0, 0, 0};
+}
+
+gausspk::~gausspk() {
+    gsl_spline_free(this->Pk);
+    gsl_interp_accel_free(this->acc);
 }
 
 gausspk::gausspk(int N, double L) : gen((std::random_device())()), dist(0.0, 1.0) {
@@ -163,7 +178,7 @@ void gausspk::sample() {
                 int index = k + (this->N.z/2 + 1)*(j + this->N.y*i);
                 
                 if (k_mag > 0) {
-                    double P = gsl_spline_eval(this->Pk, k_mag, this->acc)/this->L.w;
+                    double P = gsl_spline_eval(this->Pk, k_mag, this->acc);
                     if ((i == 0 || i == N.x/2) && (j == 0 || j == N.y/2) && (k == 0 && k == N.z/2)) {
                         dk[index].x = sqrt(P)*this->dist(this->gen);
                     } else if (k == 0 || k == N.z/2) {

@@ -1,0 +1,25 @@
+# Grid Properties
+int Nx = 512
+int Ny = 512
+int Nz = 512
+double Lx = 1024.0
+double Ly = 1024.0
+double Lz = 1024.0
+
+# Power Spectrum Properties
+int N_bins = 24
+double k_min = 0.008
+double k_max = 0.2
+double Delta_k = 0.008
+
+# File Information
+string pkFile = InputPk.dat
+string outbase = Pk_
+string outext = dat
+string realbase = dk_
+string realext = bin
+int digits = 4
+
+# Realizations Information
+int startNum = 1
+int numReals = 10
